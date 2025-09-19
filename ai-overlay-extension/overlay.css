@@ -1,0 +1,65 @@
+#ai-overlay,
+#ai-overlay * {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  color: white !important;
+}
+
+#ai-overlay {
+  font-family: Arial, sans-serif;
+  padding: 12px;
+  position: fixed;
+  top: 100px;
+  left: 100px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  z-index: 999999;
+  cursor: default;
+}
+
+#ai-overlay .header {
+  font-size: 18px;
+  margin-bottom: 8px;
+  background: rgba(0,0,0,0.5); /* slightly visible so you can see header for dragging */
+  padding: 6px;
+  border-radius: 6px;
+}
+
+#messages {
+  max-height: 200px;
+  overflow-y: auto;
+  font-size: 14px;
+  margin-bottom: 8px;
+  background: rgba(0,0,0,0.3); /* slight transparency for readability */
+  padding: 6px;
+  border-radius: 6px;
+}
+
+#user-input {
+  flex: 1;
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  border-radius: 6px;
+  background: transparent !important;
+  color: white;
+  box-sizing: border-box;
+}
+
+#send-btn {
+  padding: 6px 10px;
+  margin-left: 5px;
+  border-radius: 6px;
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+#send-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.8) !important;
+}

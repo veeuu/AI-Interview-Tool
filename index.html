@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Overlay Assistant</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: url('https://i.imgur.com/your-background-image.jpg') no-repeat center center fixed; 
+      font-family: Arial, sans-serif;
+    }
+
+
+    #ai-overlay,
+    #ai-overlay * { 
+      background: transparent !important; 
+      border: none !important; 
+      box-shadow: none !important; 
+      outline: none !important; 
+    }
+
+    #ai-overlay {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 350px;
+      backdrop-filter: none;   
+      padding: 16px;
+      font-family: Arial, sans-serif;
+      z-index: 999999;
+      transition: all 0.3s ease-in-out;
+      color: white;          
+    }
+
+    
+    #ai-overlay h3,
+    #ai-overlay .header { 
+      margin: 0 0 10px;
+      font-size: 18px;
+      background: transparent !important;
+    }
+
+    #messages {
+      max-height: 200px;
+      overflow-y: auto;
+      font-size: 14px;
+      margin-bottom: 10px;
+      background: transparent !important;
+    }
+
+    #user-input {
+      width: 75%;
+      padding: 8px;
+      border-radius: 8px;
+      background: transparent !important; 
+      border: 1px solid rgba(255, 255, 255, 0.5) !important; 
+      color: white;
+    }
+
+    #send-btn {
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: transparent !important; 
+      border: 1px solid rgba(255, 255, 255, 0.5) !important; 
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  
+  <div style="width: 100vw; height: 100vh; background-image: url('https://i.imgur.com/your-background-image.jpg'); background-size: cover; display: flex; justify-content: center; align-items: center; color: white; font-size: 40px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
+    Your Transparent Background
+  </div>
+
+  <div id="ai-overlay">
+    <h3>AI Assistant</h3>
+    <div id="messages"></div>
+    <input id="user-input" placeholder="Ask me..." />
+    <button id="send-btn">Send</button>
+  </div>
+
+  <script>
+    const overlay = document.getElementById("ai-overlay");
+    const messages = document.getElementById("messages");
+    const userInput = document.getElementById("user-input");
+    const sendBtn = document.getElementById("send-btn");
+
+    
+    function adjustTheme() {
+      
+      overlay.style.color = "white"; 
+    }
+
+    adjustTheme();
+
+    async function sendMessage() {
+      const question = userInput.value.trim();
+      if (!question) return;
+
+      messages.innerHTML += `<div><b>You:</b> ${question}</div>`;
+      userInput.value = "";
+
+      try {
+        const res = await fetch("http://localhost:5000/ask", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ question })
+        });
+        const data = await res.json();
+        if (data.answer) {
+          messages.innerHTML += `<div><b>AI:</b> ${data.answer}</div>`;
+        } else {
+          messages.innerHTML += `<div style="color:red;"><b>Error:</b> ${data.error}</div>`;
+        }
+        messages.scrollTop = messages.scrollHeight;
+      } catch (err) {
+        messages.innerHTML += `<div style="color:red;"><b>Error:</b> Could not reach AI</div>`;
+      }
+    }
+
+    sendBtn.addEventListener("click", sendMessage);
+    userInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+  </script>
+</body>
+</html>

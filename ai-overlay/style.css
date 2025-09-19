@@ -1,0 +1,67 @@
+body {
+  margin: 0;
+  background: transparent;
+  font-family: Arial, sans-serif;
+  -webkit-user-select: none;
+}
+
+#ai-overlay {
+  width: 350px;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0,0,0,0.4);
+  border-radius: 12px;
+  overflow: hidden;
+  color: white;
+
+  -webkit-app-region: drag;
+  pointer-events: none; 
+}
+
+#messages, #user-input, #send-btn {
+  -webkit-app-region: no-drag; 
+  pointer-events: auto;       
+}
+
+.header {
+  padding: 6px 10px;
+  background: rgba(0,0,0,0.6);
+  text-align: center;
+}
+
+#messages {
+  flex: 1;
+  padding: 6px;
+  overflow-y: auto;
+}
+
+.input-container {
+  display: flex;
+  padding: 6px;
+}
+
+#user-input {
+  flex: 1;
+  padding: 6px;
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: 6px;
+  background: transparent;
+  color: white;
+  box-sizing: border-box;
+}
+
+#send-btn {
+  margin-left: 5px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+#send-btn:hover {
+  background: rgba(255,255,255,0.4);
+}
