@@ -7,7 +7,18 @@
 </head>
 <body>
   <div id="ai-overlay">
-    <div class="header">AI Assistant</div>
+    <div class="header">
+      AI Assistant
+      <span id="settings-icon">⚙️</span>
+    </div>
+    <div id="settings-panel" class="hidden">
+      <label>Response Length:</label>
+      <select id="response-length">
+        <option value="short">Short</option>
+        <option value="balanced" selected>Balanced</option>
+        <option value="detailed">Detailed</option>
+      </select>
+    </div>
     <div id="messages"></div>
     <div class="input-container">
       <input id="user-input" placeholder="Ask me..." />

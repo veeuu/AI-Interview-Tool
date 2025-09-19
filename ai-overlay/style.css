@@ -6,62 +6,177 @@ body {
 }
 
 #ai-overlay {
-  width: 350px;
-  height: 450px;
+  width: 450px;   
+  height: 400px;  
   display: flex;
   flex-direction: column;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.7);
   border-radius: 12px;
   overflow: hidden;
   color: white;
-
   -webkit-app-region: drag;
-  pointer-events: none; 
 }
 
-#messages, #user-input, #send-btn {
-  -webkit-app-region: no-drag; 
-  pointer-events: auto;       
+#ai-overlay * {
+  pointer-events: auto;
+}
+
+
+#messages, #user-input, #send-btn, #settings-icon, #response-length,
+.response-options button, .message-bubble { 
+  -webkit-app-region: no-drag;
 }
 
 .header {
-  padding: 6px 10px;
-  background: rgba(0,0,0,0.6);
+  padding: 8px 12px; 
+  background: rgba(0, 0, 0, 0.8); 
   text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
+  flex-shrink: 0; 
+}
+
+#settings-icon {
+  cursor: pointer;
+  font-size: 1.2em; 
+}
+
+#settings-panel {
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+  flex-shrink: 0; 
+}
+
+.hidden {
+  display: none;
 }
 
 #messages {
-  flex: 1;
-  padding: 6px;
-  overflow-y: auto;
+  flex: 1; 
+  padding: 10px;
+  overflow-y: auto; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 8px; 
+  scroll-behavior: smooth; 
 }
+
+
+.message-bubble {
+  padding: 8px 12px;
+  border-radius: 10px;
+  max-width: 85%; 
+  word-wrap: break-word; 
+  line-height: 1.4;
+}
+
+.message-bubble.user {
+  background: rgba(30, 144, 255, 0.8); 
+  align-self: flex-end; 
+  margin-left: auto; 
+}
+
+.message-bubble.ai {
+  background: rgba(50, 50, 50, 0.8); 
+  align-self: flex-start; 
+  margin-right: auto; 
+  white-space: pre-wrap;
+}
+
+.message-bubble h1, .message-bubble h2, .message-bubble h3,
+.message-bubble p, .message-bubble ul, .message-bubble ol,
+.message-bubble strong, .message-bubble em {
+  margin: 0;
+  padding: 0;
+  color: inherit; 
+}
+
+.message-bubble strong {
+  font-weight: bold;
+}
+
+.message-bubble ul, .message-bubble ol {
+  padding-left: 20px; 
+  margin-top: 5px;
+}
+
+.message-bubble li {
+  margin-bottom: 3px;
+}
+
 
 .input-container {
   display: flex;
-  padding: 6px;
+  padding: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1); 
+  background: rgba(0, 0, 0, 0.7);
+  flex-shrink: 0; 
 }
 
 #user-input {
   flex: 1;
-  padding: 6px;
-  border: 1px solid rgba(255,255,255,0.5);
-  border-radius: 6px;
-  background: transparent;
+  padding: 8px 12px; 
+  border: 1px solid rgba(255, 255, 255, 0.3); 
+  border-radius: 20px; 
+  background: rgba(255, 255, 255, 0.1); 
   color: white;
   box-sizing: border-box;
+  resize: none; 
+  min-height: 38px; 
+  max-height: 100px; 
+  overflow-y: auto; 
+}
+
+#user-input:focus {
+  outline: none;
+  border-color: rgba(30, 144, 255, 0.7); 
+  box-shadow: 0 0 5px rgba(30, 144, 255, 0.5);
 }
 
 #send-btn {
-  margin-left: 5px;
-  padding: 6px 10px;
-  border-radius: 6px;
+  margin-left: 8px; 
+  padding: 8px 15px;
+  border-radius: 20px; 
   border: none;
-  background: rgba(255,255,255,0.2);
+  background: rgba(30, 144, 255, 0.7); 
   color: white;
   cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  font-weight: bold;
+  flex-shrink: 0; 
 }
 
 #send-btn:hover {
-  background: rgba(255,255,255,0.4);
+  background: rgba(30, 144, 255, 0.9);
+  box-shadow: 0 0 8px rgba(30, 144, 255, 0.6);
+}
+
+.response-options {
+  display: flex;
+  gap: 8px; 
+  padding: 8px 10px 10px; 
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.6); 
+  flex-shrink: 0; 
+}
+
+.response-options button {
+  flex: 1;
+  padding: 6px 10px; 
+  border-radius: 8px; 
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+  background: rgba(255, 255, 255, 0.1); 
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  font-size: 0.9em; 
+}
+
+.response-options button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
 }
